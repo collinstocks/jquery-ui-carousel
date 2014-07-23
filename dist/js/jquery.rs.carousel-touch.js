@@ -50,7 +50,7 @@ undef: true, unused: true, strict: true, trailing: true, browser: true */
             var self = this,
                 eventNamespace = this.eventNamespace;
 
-            this.element
+            this.element.parent()
                 .unbind(eventNamespace)
                 .bind('dragstart' + eventNamespace, {
                     axis: this.options.axis
@@ -232,8 +232,8 @@ undef: true, unused: true, strict: true, trailing: true, browser: true */
         
             var time,
                 distance,
-                speed,
-                direction,
+                velocity,
+                position,
                 axis = this._getAxis();
                 
             // if touch direction changes start date should prob be reset to correctly determine speed...
@@ -246,9 +246,26 @@ undef: true, unused: true, strict: true, trailing: true, browser: true */
                 y: e.pageY
             };
             
-            distance = Math.abs(this.startPos[axis] - this.endPos[axis]);
-            speed = distance / time;
-            direction = this.startPos[axis] > this.endPos[axis] ? 'next' : 'prev';
+            position = this.getPage().first().position()[this.isHorizontal ? 'left' : 'top'] + this.startPos[axis] - this.endPos[axis];
+            velocity = (this.startPos[axis] - this.endPos[axis]) / time;
+            position += velocity * 100;
+            console.log(velocity);
+
+            var min_distance = Infinity;
+            var pages = this.getPages();
+            for (var i in pages) {
+                var pos = pages[i].first().position()[
+                    that.isHorizontal ? 'left' : 'top'];
+                var dist = Math.abs(pos - position);
+                if (dist < min_distance) {
+                    min_distance = dist;
+                    this.index = i;
+                }
+            }
+
+            this.goToPage(this.index);
+
+            return;
 
             if (speed > this.options.sensitivity || distance > this._getMaskDim() / 2) {
                 if ((this.index === this.getNoOfPages() - 1 && direction === 'next') || (this.index === 0 && direction === 'prev')) {

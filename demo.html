@@ -32,7 +32,7 @@
 		
 			$('body').removeClass('no-js');
 			
-		   	demo.init($('#container'));
+			demo.init($('#container'));
 		
 		});
 	</script>
@@ -59,8 +59,8 @@
 			<div class="field">
 				<label for="itemsPerTransition">itemsPerTransition:</label>
 				<select id="itemsPerTransition" name="itemsPerTransition">
-					<option value="auto" selected="selected">auto</option>
-					<option value="1">1</option>
+					<option value="auto">auto</option>
+					<option value="1" selected="selected">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
@@ -95,7 +95,7 @@
 			
 			<div class="field">
 				<label for="pagination">pagination:</label>
-				<input type="checkbox" id="pagination" name="pagination" checked="checked" />
+				<input type="checkbox" id="pagination" name="pagination" />
 			</div>
 			
 			<div class="field">
@@ -107,7 +107,12 @@
 				<label for="whitespace">whitespace:</label>
 				<input type="checkbox" id="whitespace" name="whitespace" />
 			</div>
-			
+
+			<div class="field">
+				<label for="touch">touch:</label>
+				<input type="checkbox" id="touch" name="touch" checked="checked" />
+			</div>
+
 			<div class="field">
 				<label for="autoScroll">autoScroll:</label>
 				<input type="checkbox" id="autoScroll" name="autoScroll" />
