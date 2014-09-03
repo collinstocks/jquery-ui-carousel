@@ -255,7 +255,7 @@ undef: true, unused: true, strict: true, trailing: true, browser: true */
             var pages = this.getPages();
             for (var i in pages) {
                 var pos = pages[i].first().position()[
-                    that.isHorizontal ? 'left' : 'top'];
+                    this.isHorizontal ? 'left' : 'top'];
                 var dist = Math.abs(pos - position);
                 if (dist < min_distance) {
                     min_distance = dist;
